@@ -5,6 +5,8 @@
  */
 programa {
 	//***********Região para variaveis globais*******************
+	inclua biblioteca Texto --> tx
+	//***********Região para variaveis globais*******************
 	caracter posicoes[] = {'1','2','3','4','5','6','7','8','9'}
 	caracter jogadorDaVez = 'X'
 	inteiro contadorJogadasValidas = 0
@@ -54,6 +56,13 @@ programa {
 			jogadorDaVez = 'X'
 		}
 	}
+	funcao caracter inverteJogador(caracter jogador){
+		se(jogador == 'X'){//revezar o jogador
+			retorne 'O'
+		} senao{
+			retorne 'X'
+		}
+	}
 
 	funcao logico validaAcaoUsuario(inteiro opcaoUsuario){
 		se(opcaoUsuario < 1 ou opcaoUsuario >9) {
@@ -67,7 +76,69 @@ programa {
 		}
 		retorne verdadeiro
 	}
+
+	funcao logico validaVitoria(caracter ultimoJogador){
+		logico temVencedor = falso
+		se (validaHorizontal(ultimoJogador) == verdadeiro){
+			temVencedor = verdadeiro
+		} senao se (validaVertical(ultimoJogador)){
+			temVencedor = verdadeiro	
+		} senao se (validaDiagonal(ultimoJogador)){
+			temVencedor = verdadeiro
+		}
+		se(temVencedor == verdadeiro){
+			imprimeTelaJogo()
+			escreva("VITORIA - O jogador [", ultimoJogador,"] venceu !!!!!!\n")
+			escreva("Parabens\n")
+			escreva("Para Jogar novamente, reinicie o jogo !!!\n")
+		}
+		retorne temVencedor
+	}
+
+	funcao logico validaHorizontal(caracter jogador){
+		se(posicoes[0] == jogador e posicoes[1] == jogador e posicoes[2] == jogador){
+			retorne verdadeiro
+		} senao se(posicoes[3] == jogador e posicoes[4] == jogador e posicoes[5] == jogador){
+			retorne verdadeiro
+		} senao se(posicoes[6] == jogador e posicoes[7] == jogador e posicoes[8] == jogador){
+			retorne verdadeiro
+		}
+		retorne falso
+	}
+	
+	funcao logico validaVertical(caracter jogador){
+		se(posicoes[0] == jogador e posicoes[3] == jogador e posicoes[6] == jogador){
+			retorne verdadeiro
+		} senao se(posicoes[1] == jogador e posicoes[4] == jogador e posicoes[7] == jogador){
+			retorne verdadeiro
+		} senao se(posicoes[2] == jogador e posicoes[5] == jogador e posicoes[8] == jogador){
+			retorne verdadeiro
+		}
+		retorne falso
+	}
+	
+	funcao logico validaDiagonal(caracter jogador){
+		se(posicoes[0] == jogador e posicoes[4] == jogador e posicoes[8] == jogador){
+			retorne verdadeiro
+		} senao se(posicoes[2] == jogador e posicoes[4] == jogador e posicoes[6] == jogador){
+			retorne verdadeiro
+		}
+		retorne falso
+	}
+
+	funcao imprimeMensagem(cadeia mensagem){
+		inteiro tamanho = tx.numero_caracteres(mensagem)
+		cadeia linha = "*-"
+		para(inteiro i = 0; i< tamanho; i++){
+			linha +="-"
+		}
+		linha +="-*"
 		
+		escreva(linha, "\n")
+		escreva(mensagem,"\n")
+		escreva(linha, "\n")
+    }
+	
 	/*Esta é a função que o algoritmo irá SEMPRE executar primeiro!!!!! */
 	funcao inicio() {
 		inteiro opcaoUsuario//guardar a opção do usuario da vez
@@ -80,17 +151,23 @@ programa {
 			imprimeTelaJogo()
 			//
 			leia(opcaoUsuario)
-			se(validaAcaoUsuario(opcaoUsuario)){
+			se(validaAcaoUsuario(opcaoUsuario)){				
 				se (contadorJogadasValidas >=8){//valida fim de jogo - EMPATE
 					escreva("FIM DE JOGO -  Deu  Velha (Empate)!!!! \n1")
 					funcaoContinuar()
 					executar = falso
-				}senao {//jogada valida			
+				} senao {//jogada valida			
 					contadorJogadasValidas++
 					posicoes[opcaoUsuario-1] = jogadorDaVez //marcar simbolo do jogador
-					//verificar AQUI se há vencedor
-					trocaJogador()
+					//verificar se há vencedor
+					se(validaVitoria(jogadorDaVez)){
+						executar = falso						
+					} senao{
+						trocaJogador()
+					}
+					
 				}
+				
 			}
 		} enquanto(executar == verdadeiro)
 	}	
@@ -101,7 +178,7 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3220; 
+ * @POSICAO-CURSOR = 5488; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
