@@ -1,6 +1,6 @@
 programa {
   inteiro tempo[10]
-  funcao continuar(){
+  funcao continue(){
     cadeia enter
     escreva("Pressione ENTER para continuar...\n")
     leia(enter)
@@ -8,15 +8,15 @@ programa {
   funcao fichaNavegacao(){
     limpa()
     escreva("------------------------------------------------------------- \n")
-    escreva("|Referencias           | RM  |  DISTÂNCIA  | TEMPO  |  ETO \n")
-    escreva("|Través NW Liberty	    | 254 |      2      |   2    |  1020 \n")
-    escreva("|Vertical Teresopolis	| 254 |      5      |   4    |  1024 \n")
-    escreva("|Traves S Pista Terra	| 254 |      5      |   4    |  1028 \n")
-    escreva("|Vertical SATO		      | 140 |      4      |   3    |  1031 \n")
+    escreva("|Referencias           | RM  |  DISTÃ‚NCIA  | TEMPO  |  ETO \n")
+    escreva("|TravÃ©s NW Liberty	 | 254 |      2      |   2    |  1020 \n")
+    escreva("|Vertical Teresopolis	 | 254 |      5      |   4    |  1024 \n")
+    escreva("|Traves S Pista Terra	 | 254 |      5      |   4    |  1028 \n")
+    escreva("|Vertical SATO		 | 140 |      4      |   3    |  1031 \n")
     escreva("|Vertical GO 457	      | 203 |      8      |   6    |  1037 \n")
-    escreva("|Vertical GO			      | 205 |      5      |   4    |  1041 \n")
+    escreva("|Vertical GO		 | 205 |      5      |   4    |  1041 \n")
     escreva("------------------------------------------------------------- \n")
-    continuar()
+    continue()
   }
 
   funcao menuPrincipal(){
@@ -24,9 +24,9 @@ programa {
     escreva("------------------------------------------------------------- \n")
     escreva("MENU PRINCIPAL\n")
     escreva("1 - Definir Origem/Destino e horario de decolagem \n")
-    escreva("2 - Inserir pontos de navegação\n")
+    escreva("2 - Inserir pontos de navegaÃ§Ã£o\n")
     escreva("3 - Calcular Dados(Tempo, ETO)\n")
-    escreva("4 - Imprimir Ficha de navageção")
+    escreva("4 - Imprimir Ficha de navageÃ§Ã£o")
     escreva("0 - Voltar ao menu anterior\n")
     escreva("------------------------------------------------------------- \n")
     //continuar()
@@ -47,12 +47,12 @@ programa {
     limpa()
     escreva("------------------------------------------------------------- \n")
     escreva("DEFINICAO DE ORIGEM E DESTINO\n")
-    escreva("Selecione uma opção:\n")
+    escreva("Selecione uma opÃ§Ã£o:\n")
     escreva("1 - Definir e configurar ORIGEM/DESTINO\n")
     escreva("2 - Visualizar Origem/Destino\n")
     escreva("3 - Determinar horario decolagem (UTC)\n")
     escreva("0 - Voltar ao menu anterior\n")
-    escreva("Informe uma opção: ")
+    escreva("Informe uma opÃ§Ã£o: ")
     leia(opcaoMenu)
     escolha(opcaoMenu)  
       {  
@@ -60,7 +60,7 @@ programa {
           definirOrigemDestino()
         pare
         caso '2':  
-          visualizarOrigemDestino()
+          //visualizarOrigemDestino()
         pare
         caso '3':  
           definirHorarioDecolagem()
@@ -68,10 +68,10 @@ programa {
         caso contrario:  
           mensagemOpcaoInvalida()
       }
-    continuar()
+    continue()
     definirOrigemDestino()
-    continuar()
-    }enquanto(continuar)
+    continue()
+    }enquanto(continuar == verdadeiro)
 
   }
 
@@ -98,8 +98,8 @@ programa {
   }
 
   funcao mensagemOpcaoInvalida(){
-    escreva("EERO - Opção invalida. Verifique e tente novamente")
-    continuar()
+    escreva("EERO - OpÃ§Ã£o invalida. Verifique e tente novamente")
+    continue()
   }
 
   funcao inicio() {
@@ -107,7 +107,7 @@ programa {
     caracter opcaoPrincipal
     faca {
       menuPrincipal()
-      escreva("Informe uma opção: ")
+      escreva("Informe uma opÃ§Ã£o: ")
       leia(opcaoPrincipal)
       escolha(opcaoPrincipal)  
       {  
@@ -139,3 +139,15 @@ programa {
     
   }
 }
+
+/* $$$ Portugol Studio $$$ 
+ * 
+ * Esta seÃ§Ã£o do arquivo guarda informaÃ§Ãµes do Portugol Studio.
+ * VocÃª pode apagÃ¡-la se estiver utilizando outro editor.
+ * 
+ * @POSICAO-CURSOR = 1517; 
+ * @PONTOS-DE-PARADA = ;
+ * @SIMBOLOS-INSPECIONADOS = ;
+ * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
+ * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
+ */
